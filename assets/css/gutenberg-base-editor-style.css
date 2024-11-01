@@ -1,0 +1,272 @@
+/*---------------------------------------------------------------------------------
+ * Theme Support for Gutenberg
+ * First created April 2018
+ * License: GNU General Public License v3 or later
+ * License URI: //www.gnu.org/licenses/gpl-3.0.html
+ * Copyright 2018, Bruce E. Wampler
+ *
+ * gutenberg-base-editor-style.css
+ *
+ * Provides base styling for Gutenberg Editor
+ * Enqueue this style sheet in theme's enqueue_block_editor_assets action.
+ *
+ * This does not style the font-end view, but just the editor.
+ * Front-end base styling for Gutenberg blocks provided by gutenberg-blocks.css
+ *
+ * Note that this file will loaded via the enqueue_block_editor_assets action, which loads
+ * for the editor only
+ *
+ * --------------------------------------------------------------------------------- */
+
+/*
+ * Theme Styles found in Theme main style file
+ *
+ * Rather than loading the entire theme style sheet for the editor, the theme specific
+ * styles relevant to page post content should be duplicated in these styles. Here, they
+ * are mixed in with the .wp-block styles, but prefixed by .mce-content-body.
+ *
+ */
+
+.edit-post-visual-editor, .edit-post-visual-editor input[type="text"].editor-default-block-appender__content, .edit-post-visual-editor p {
+	font-family: 	inherit !important;
+	font-size: 		inherit !important;
+}
+
+body {								/* these override some interfering body values found in some themes... */
+	width: 			inherit !important;
+	max-width: 		5000px !important;
+	margin:			0 !important;
+	font-size: 		inherit !important;
+	padding:		0 !important;
+}
+
+#adminmenu li > ul,				/* 2017 theme fix */
+#adminmenu li > ol {
+	margin-left:	0;
+}
+
+/* Set a generous max widths for Post Title and content area */
+
+
+.edit-post-visual-editor .editor-post-title,
+.edit-post-visual-editor .editor-block-list__block {
+	max-width:			1100px;
+}
+
+.edit-post-visual-editor .editor-block-list__block[data-align="wide"] { /* editor-block-list__block + 200px works well */
+	max-width: 			1300px;
+}
+
+.edit-post-layout {
+	background-color: 	#FFF;
+	box-sizing: 		border-box;
+}
+
+.editor-block-list__layout .editor-block-list__block[data-align="full"] > .editor-block-list__block-edit figure.is-video {	/* video fullwidth embeds need this tweak */
+	width:				99%;
+}
+
+.editor-block-list__layout .editor-block-list__block[data-align="full"] {
+	margin-left: -25px;
+	margin-right: -25px;
+}
+
+.edit-post-layout .editor-post-title textarea {		/* tweak the title text box and textarea */
+	background-color: 	transparent;		/* need to set to inherit so styling can use .editor-post-title only */
+	color: 				inherit;
+	font:				inherit;
+	padding-bottom:		0px;
+	margin-bottom:		0px;
+}
+
+.edit-post-layout .editor-post-title {
+	color:				inherit;
+	background-color: 	transparent;
+	font-weight:		bold;
+	margin-bottom:		.5em;
+	padding-bottom: 	0;
+	padding-top: 		0;
+	position: 			relative;
+}
+
+
+/* ======= blockquote ====== */
+
+.mce-content-body blockquote {
+	background:		rgba(128, 128, 128, 0.1);
+	border-left:	4px solid rgba(128, 128, 128, 0.4) !important;
+	margin:			1.5em auto	!important;
+	overflow:		auto;
+	padding:		0.8em 1.5em 1em 1.2em;
+	width: 			90%;
+}
+
+.mce-content-body blockquote cite {
+	font-style:		normal;
+	font-weight:	bold;
+}
+
+.mce-content-body blockquote p {
+	font-style:		italic;
+	font-size:		1em;
+	margin-bottom:	0;
+}
+
+.mce-content-body em,
+.mce-content-body i {
+	font-style:		italic;
+}
+
+.mce-content-body cite {			/* cite is supposed to be used only in a quote or blockquote */
+	border-width:	0;
+	display:		block;
+	margin-left:	3em;
+	margin-top:		.5em;
+}
+
+.mce-content-body blockquote em,
+.mce-content-body blockquote i {
+	font-style: 	italic;
+}
+
+
+
+/* ====== Cover Images ====== */
+/*
+ * Following styling assumes the theme treats block-cover-image as a fullwidth parallax image.
+ * They won't display as full width in the editor, but will extend to margins.
+ *
+ */
+
+.editor-block-list__block .wp-block-cover-image {
+	height: 			50vh;
+	margin-left:		auto;
+	margin-right:		auto;
+	min-height: 		400px;
+	width:				100%;
+}
+
+.editor-block-list__block .wp-block-cover-image.alignfull {		/* This makes a full area image */
+		left: 			0;
+		margin-left: 	auto;
+		margin-right:	auto;
+		width: 			100%;
+	}
+
+
+/* ====== Images ====== */
+/**
+ * We will do minimal styling on images.
+ * This will allow Gutenberg to style its images, and the theme to style non-Gutenberg images.
+ *
+ */
+
+.mce-content-body img {
+	max-width: 			100%;
+}
+.mce-content-body img[class*="wp-image-"] {
+	height: 			auto;
+	max-width: 			100%;
+}
+
+.mce-content-body img.size-full {
+	max-width: 			100% !important;
+	width: 				auto; /* Prevent stretching of full-size images in IE8 */
+}
+
+.mce-content-body img.wp-smiley {
+	border: 			none;
+	margin-bottom: 		0;
+	margin-top: 		0;
+	padding: 			0;
+}
+.mce-content-body p img,
+.wp-caption {
+	margin-top: 		0.4em;
+}
+
+.mce-content-body img {
+	background-color: 	transparent;
+	margin-bottom: 		1em;
+	padding: 			0;			/* image border width */
+}
+
+.wp-caption, img {
+	background-color: 	transparent;
+	border:				none;
+	height: 			auto;
+	margin: 			0;
+	margin-bottom: 		1em;
+	max-width: 			100%;
+	padding: 			0;			/* image border width */
+	text-align: 		center;
+}
+.wp-caption {
+	margin:				10px 20px 10px 10px;
+	padding: 			8px 3px 0px 3px;
+}
+
+.mce-content-body img.alignleft,
+.mce-content-body img.alignright,
+.mce-content-body img.aligncenter {
+	margin-bottom: 		1.625em;
+}
+
+
+
+/* ====== Lists ====== */
+
+
+/* Assistive text */
+.assistive-text {
+	clip: 				rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: 				rect(1px, 1px, 1px, 1px);
+	position: 			absolute !important;
+}
+
+/* Alignment */
+
+.alignleft {
+	display: 			inline;
+	float: 				left;
+	margin-right: 		1.625em;
+}
+.alignright {
+	display: 			inline;
+	float: 				right;
+	margin-left: 		1.625em;
+}
+.aligncenter {
+	clear: 				both;
+	display:			block;
+	margin-left: 		auto;
+	margin-right: 		auto;
+}
+
+.mce-content-body .alignfull,
+.mce-content-body .alignwide,
+.mce-content-body .aligncenter {
+	clear: 				both;
+}
+
+.mce-content-body .alignwide,
+.mce-content-body p.alignwide {
+	margin-left: 		-10% !important;
+	margin-right: 		-10% !important;
+	max-width: 			120% !important;
+}
+
+.wp-block-text-columns.alignwide {
+	margin-left: 		-5% !important;
+	margin-right: 		-5% !important;
+	max-width: 			110% !important;
+}
+
+.editor-block-list__layout .editor-block-list__block[data-align="wide"] > .editor-block-list__block-edit figure {
+	width: 100%;
+}
+
+
+/* =HTML Elements */
+
+/* end */
